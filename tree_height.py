@@ -1,43 +1,35 @@
-# python3
-
 import sys
 import threading
 import numpy
 
-
 def compute_height(n, parents):
     # Write this function
     max_height = 0
-    # Your code here
-    tree = numpy.arrays(parents)
-    for i in range(n):
-        max_height = max(next(tree, i), max_height)
+    for x in range(n):
+        dzilums = 0
+        id = x
+        while id != -1:
+            dzilums = dzilums + 1
+            id = parents[id]
+        max_height = max(max_height, dzilums)
+
     return max_height
 
-def next(tree, i):
-    height = 1
-    element = tree[i]
-    while(element != -1 ):
-        element = tree[element]
-        height = height + 1
-    return height
-
 def main():
-    txt=input()
-    if "F" in txt:
-        filename=input()
-        if "a" not in filename:
-            with open(str("test/"+filename), mode="r") as fails:
-                count = int(fails.readline())
-                elements = list(map(int, fails.readline().split()))
-        else:
-            print("error")
-    elif "I" in txt:
-        count=int(input())
-        elements = list(map(int, input().split()))
-    else:
-        print("Input error")
-    print(compute_height(count, elements))
+    text = str(input())
+    if "I" in text:
+        skaits = int(input())
+        dati = list(map(int, input().split()))
+        print(compute_height(skaits, dati))
+
+    if "F" in text:
+        name = str(input())
+        name = "test/" + str(name)
+        file = open(name,'r')
+        skaits = int(file.readline())
+        dati = list(map(int, file.readline().split()))
+        file.close()
+        print(compute_height(skaits, dati))
 
 
 sys.setrecursionlimit(10**7)
